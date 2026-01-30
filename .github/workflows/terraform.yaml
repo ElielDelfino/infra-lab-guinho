@@ -3,7 +3,7 @@ name: Terraform CI/CD
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
+      apply:
         description: 'Executar o terraform apply ?'
         required: true
         default: 'false'
@@ -45,7 +45,7 @@ jobs:
 
       - name: Terraform apply
         run: terraform apply --auto-approve tfplan.tfout
-        if: github.event.inputs.logLevel == 'true'
+        if: github.event.input.apply == 'true'
 
 
 
