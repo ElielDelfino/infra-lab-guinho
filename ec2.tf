@@ -2,7 +2,7 @@
 resource "aws_instance" "ec2_server" {
   ami                    = "ami-03ea746da1a2e36e7"
   instance_type          = "t3.micro"
-  key_name               = aws_key_pair.lab-key-guinho.key_name
+  key_name               = aws_key_pair.lab_key.key_name
   vpc_security_group_ids = [aws_security_group.lab-sg-guinho.id]
   iam_instance_profile   = aws_iam_instance_profile.ecr_ec2_profile.name
 
