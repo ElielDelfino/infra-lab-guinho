@@ -16,10 +16,16 @@ resource "aws_instance" "ec2_server" {
 
 
 #KEY-PAIR
-resource "aws_key_pair" "lab-key-guinho" {
-  key_name   = "ec2-keypair"
-  public_key = file("~/.ssh/terraform-ec2.pub")
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
+
+resource "aws_key_pair" "lab_key" {
+  key_name   = "lab-key-guinho"
+  public_key = tls_private_key.ssh_key.public_key_openssh
+}
+
 
 
 #SECURITY GROUP EC2 
