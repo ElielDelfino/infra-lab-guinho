@@ -70,7 +70,7 @@ jobs:
       - name: Print SSH private key (FORCED)
         run: |
           terraform console <<EOF
-          tls_private_key.ssh_key.private_key_pem
+          nonsensitive(tls_private_key.ssh_key.private_key_pem)
           EOF
 
       - name: Terraform Plan Destroy
