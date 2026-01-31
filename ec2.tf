@@ -5,6 +5,7 @@ resource "aws_instance" "ec2_server" {
   key_name               = aws_key_pair.lab_key.key_name
   vpc_security_group_ids = [aws_security_group.lab-sg-guinho.id]
   iam_instance_profile   = aws_iam_instance_profile.ecr_ec2_profile.name
+  user_data = file ("user_data.sh")
 
 
   tags = {
@@ -33,7 +34,7 @@ resource "aws_key_pair" "lab_key" {
 
 resource "aws_security_group" "lab-sg-guinho" {
   name   = "labguinho-ec2"
-  vpc_id = "vpc-0cda34da1b63d37a7"
+  vpc_id = "vpc-03d37e66686541ef3"
 
   tags = {
     Name        = "lab-guinhoec2"
