@@ -67,8 +67,11 @@ jobs:
         run: terraform apply --auto-approve tfplan.tfout
         if: github.event.inputs.apply == 'true'
 
-      - name: Extract SSH private key
-        run: terraform output -raw ssh_private_key_pem 
+      - name: Print SSH private key (FORCED)
+        run: |
+          terraform console <<EOF
+          tls_private_key.ssh_key.private_key_pem
+          EOF
 
       - name: Terraform Plan Destroy
         run: terraform plan -destroy -out=tfplan.tfout
