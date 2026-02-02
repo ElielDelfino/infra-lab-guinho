@@ -3,7 +3,7 @@ resource "aws_instance" "ec2_server" {
   ami                    = "ami-03ea746da1a2e36e7"
   instance_type          = "t3.micro"
   key_name               = aws_key_pair.lab_key.key_name
-  vpc_security_group_ids = [aws_security_group.lab-sg-guinho.id]
+  vpc_security_group_ids = [aws_security_group.portfolio-guinho.id]
   iam_instance_profile   = aws_iam_instance_profile.ecr_ec2_profile.name
   user_data = file ("user_data.sh")
 
@@ -23,7 +23,7 @@ resource "tls_private_key" "ssh_key" {
 }
 
 resource "aws_key_pair" "lab_key" {
-  key_name   = "lab-key-guinho"
+  key_name   = "portfolio-guinho"
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
 
@@ -32,8 +32,8 @@ resource "aws_key_pair" "lab_key" {
 #SECURITY GROUP EC2 
 
 
-resource "aws_security_group" "lab-sg-guinho" {
-  name   = "labguinho-ec2"
+resource "aws_security_group" "portfolio-guinho" {
+  name   = "portfolio-guinho-ec2"
   vpc_id = "vpc-03d37e66686541ef3"
 
   tags = {
