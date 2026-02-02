@@ -55,7 +55,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Terraform init
-        run: terraform init
+        run: terraform init -upgrade
 
       - name: Terraform Validate
         run: terraform validate
