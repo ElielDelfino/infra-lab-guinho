@@ -42,17 +42,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-
       - name: "Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v5.1.1
         with: 
-          role-to-assume: arn:aws:iam::890871562295:role/GitHubInfraRole
+          role-to-assume: arn:aws:iam::890871562295:role/Projeto-MariaLazara
           aws-region: us-east-2
 
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v3.1.2 
-        with:
-          terraform_wrapper: false
 
       - name: Terraform init
         run: terraform init -upgrade
@@ -66,12 +63,6 @@ jobs:
       - name: Terraform apply
         run: terraform apply --auto-approve tfplan.tfout
         if: github.event.inputs.apply == 'true'
-
-      - name: Print SSH private key (FORCED)
-        run: |
-          terraform console <<EOF
-          nonsensitive(tls_private_key.ssh_key.private_key_pem)
-          EOF
 
       - name: Terraform Plan Destroy
         run: terraform plan -destroy -out=tfplan.tfout
