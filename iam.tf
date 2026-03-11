@@ -19,6 +19,6 @@ resource "aws_iam_role_policy_attachment" "ecr_readonly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 resource "aws_iam_role_policy_attachment" "ec2_ssm_core" {
-  role       = aws_iam_role.ec2_ssm_role.name
+  role       = aws_iam_role.ecr_ec2.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
